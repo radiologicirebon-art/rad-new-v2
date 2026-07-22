@@ -1532,9 +1532,16 @@
         const auth = getAuth(app);
 
         // =============================================
-        // AUTHENTICATION GATE — hanya UID ini yang diizinkan masuk
+        // AUTHENTICATION GATE — hanya UID di daftar ini yang diizinkan masuk
+        // Tambahkan UID baru ke array di bawah untuk mengizinkan user lain login.
+        // Cara dapat UID: Firebase Console > Authentication > Users > buat/lihat user,
+        // lalu copy kolom "User UID" ke dalam array ini.
         // =============================================
-        const AUTHORIZED_UID = "bAVm14F37NQScVFLhfKxtjzvNxw2";
+        const AUTHORIZED_UIDS = [
+            "bAVm14F37NQScVFLhfKxtjzvNxw2" // Ino Hadiwinata (akun utama)
+            // , "UID_USER_KEDUA_DI_SINI"   // contoh: dr. Amelia Rusli Asali
+            // , "UID_USER_KETIGA_DI_SINI"  // contoh: dr. Christien Iwan
+        ];
 
         const loginPortalEl = document.getElementById('loginPortal');
         const appShellEl = document.getElementById('appShell');
@@ -1577,7 +1584,7 @@
             const password = loginPasswordEl.value;
             try {
                 const cred = await signInWithEmailAndPassword(auth, email, password);
-                if (cred.user.uid !== AUTHORIZED_UID) {
+                if (!AUTHORIZED_UIDS.includes(cred.user.uid)) {
                     await signOut(auth);
                     showLoginError('Akun ini tidak diotorisasi untuk mengakses dashboard.');
                     setLoginLoading(false);
@@ -1595,7 +1602,7 @@
         });
 
         onAuthStateChanged(auth, (user) => {
-            if (user && user.uid === AUTHORIZED_UID) {
+            if (user && AUTHORIZED_UIDS.includes(user.uid)) {
                 showApp();
             } else if (user) {
                 // Login berhasil tapi UID tidak diotorisasi
