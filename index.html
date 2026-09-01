@@ -272,7 +272,7 @@
     <div id="loginPortal">
         <div id="loginCard">
             <div class="login-logo" style="height:64px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;letter-spacing:-0.5px;color:#119c9f;">Bantu<span style="color:#f58320;">.IN</span></div>
-            <h1 class="text-center font-black text-xl text-slate-800 tracking-tight">Dashboard</h1>
+            <h1 class="text-center font-black text-xl text-slate-800 tracking-tight">Dashboard Radiologi</h1>
             <p class="text-center text-[10px] text-[#119c9f] uppercase tracking-widest font-bold mb-6">Bantu.IN &middot; Area Terbatas</p>
 
             <form id="loginForm" class="space-y-3">
@@ -913,7 +913,7 @@
                                             <th class="px-3 py-2 font-black text-[#54b0b2] uppercase">Tanggal</th>
                                             <th class="px-3 py-2 font-black text-[#54b0b2] uppercase">Jam</th>
                                             <th class="px-3 py-2 font-black text-[#54b0b2] uppercase">Jenis Pemeriksaan</th>
-                                            <th class="px-3 py-2 font-black text-[#54b0b2] uppercase">Nama Pasien</th>
+                                            <th class="px-3 py-2 font-black text-[#54b0b2] uppercase">Nomor</th>
                                         </tr>
                                     </thead>
                                     <tbody id="opJadwalBody">
@@ -1159,9 +1159,9 @@
                         </div>
                         <div>
                             <label class="text-[10px] font-black text-slate-500 uppercase mb-1 block">
-                                <i class="fa-solid fa-user text-[#119c9f] mr-1"></i> Nama Pasien <span class="text-red-500">*</span>
+                                <i class="fa-solid fa-hashtag text-[#119c9f] mr-1"></i> Nomor <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" id="jdNama" placeholder="Nama lengkap pasien" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-[#119c9f] rounded-xl text-sm outline-none transition">
+                            <input type="text" id="jdNama" placeholder="Masukkan nomor" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/[^0-9]/g,'')" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-[#119c9f] rounded-xl text-sm outline-none transition">
                         </div>
                         <div>
                             <label class="text-[10px] font-black text-slate-500 uppercase mb-1 block">
@@ -1234,7 +1234,7 @@
                                     <th class="p-4 text-slate-500 uppercase text-[10px]">Tanggal</th>
                                     <th class="p-4 text-slate-500 uppercase text-[10px]">Jam Pemeriksaan</th>
                                     <th class="p-4 text-slate-500 uppercase text-[10px]">Jenis Pemeriksaan</th>
-                                    <th class="p-4 text-slate-500 uppercase text-[10px]">Nama Pasien</th>
+                                    <th class="p-4 text-slate-500 uppercase text-[10px]">Nomor</th>
                                     <th class="p-4 text-center text-slate-500 uppercase text-[10px]">Status</th>
                                     <th class="p-4 text-center text-slate-500 uppercase text-[10px]">Aksi</th>
                                 </tr>
@@ -1383,7 +1383,7 @@
                                     <tr class="text-left text-[10px] md:text-xs uppercase tracking-widest text-slate-400 border-b">
                                         <th class="p-3 md:p-4">Jam</th>
                                         <th class="p-3 md:p-4">Pemeriksaan</th>
-                                        <th class="p-3 md:p-4">Nama Pasien</th>
+                                        <th class="p-3 md:p-4">Nomor</th>
                                         <th class="p-3 md:p-4 text-center">Status</th>
                                     </tr>
                                 </thead>
@@ -1412,7 +1412,7 @@
                                         <th class="p-3 md:p-4">Tanggal</th>
                                         <th class="p-3 md:p-4">Jam</th>
                                         <th class="p-3 md:p-4">Pemeriksaan</th>
-                                        <th class="p-3 md:p-4">Nama Pasien</th>
+                                        <th class="p-3 md:p-4">Nomor</th>
                                         <th class="p-3 md:p-4 text-center">Sisa</th>
                                     </tr>
                                 </thead>
@@ -1456,8 +1456,8 @@
                     <input type="time" id="editJdJam" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-[#119c9f] rounded-xl text-sm outline-none transition">
                 </div>
                 <div>
-                    <label class="text-[10px] font-black text-slate-500 uppercase mb-1 block"><i class="fa-solid fa-user text-[#119c9f] mr-1"></i> Nama Pasien <span class="text-red-500">*</span></label>
-                    <input type="text" id="editJdNama" placeholder="Nama lengkap pasien" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-[#119c9f] rounded-xl text-sm outline-none transition">
+                    <label class="text-[10px] font-black text-slate-500 uppercase mb-1 block"><i class="fa-solid fa-hashtag text-[#119c9f] mr-1"></i> Nomor <span class="text-red-500">*</span></label>
+                    <input type="text" id="editJdNama" placeholder="Masukkan nomor" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/[^0-9]/g,'')" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-[#119c9f] rounded-xl text-sm outline-none transition">
                 </div>
                 <div>
                     <label class="text-[10px] font-black text-slate-500 uppercase mb-1 block"><i class="fa-solid fa-x-ray text-[#119c9f] mr-1"></i> Jenis Pemeriksaan <span class="text-red-500">*</span></label>
@@ -2895,7 +2895,7 @@
                         : [['','Tidak ada jadwal pasien untuk hari ini','','','']];
                     doc.autoTable({
                         startY: Y+6,
-                        head: [['No','Tanggal','Jam','Jenis Pemeriksaan','Nama Pasien']],
+                        head: [['No','Tanggal','Jam','Jenis Pemeriksaan','Nomor']],
                         body: bodyHari,
                         styles: { fontSize:7.5, cellPadding:1.8, overflow:'linebreak' },
                         headStyles: { fillColor:[17,156,159], textColor:[255,255,255], fontStyle:'bold', fontSize:7.5 },
@@ -2921,7 +2921,7 @@
                         : [['','Tidak ada jadwal mendatang dalam 7 hari ke depan','','','','']];
                     doc.autoTable({
                         startY: Y+6,
-                        head: [['No','Tanggal','Jam','Jenis Pemeriksaan','Nama Pasien','Sisa']],
+                        head: [['No','Tanggal','Jam','Jenis Pemeriksaan','Nomor','Sisa']],
                         body: bodyMen,
                         styles: { fontSize:7.5, cellPadding:1.8, overflow:'linebreak' },
                         headStyles: { fillColor:[245,131,32], textColor:[255,255,255], fontStyle:'bold', fontSize:7.5 },
