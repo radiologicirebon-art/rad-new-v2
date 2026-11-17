@@ -315,6 +315,7 @@
                     class="fa-solid fa-xmark text-2xl"></i></button>
         </div>
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <p class="px-3 pt-3 pb-1 text-[10px] font-black uppercase tracking-widest text-slate-400">Menu Utama</p>
             <button onclick="switchTab('dashboard')" data-target="dashboard"
                 class="sidebar-btn active w-full flex items-center p-4 rounded-xl transition-all hover:bg-slate-100">
                 <i class="fa-solid fa-chart-line w-6"></i> <span class="ml-3 font-semibold">Dashboard</span>
@@ -339,17 +340,12 @@
                 class="sidebar-btn w-full flex items-center p-4 rounded-xl transition-all hover:bg-slate-100">
                 <i class="fa-solid fa-database w-6"></i> <span class="ml-3 font-semibold">Rekap Laporan</span>
             </button>
-            <button onclick="window.open('https://drive.google.com/drive/folders/1055i5ozzYzJA-WzF8xesyrJrCt2AB0iF?usp=sharing', '_blank')"
-                class="sidebar-btn w-full flex items-center p-4 rounded-xl transition-all bg-gradient-to-r from-[#1d4ed8] to-[#2563eb] text-white hover:from-[#1e40af] hover:to-[#1d4ed8] shadow-md">
-                <i class="fa-solid fa-file-circle-check w-6"></i> <span class="ml-3 font-semibold text-sm leading-tight">Dokumen Informed Consent / Penolakan / Persiapan</span>
-                <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs opacity-75 flex-shrink-0"></i>
-            </button>
+            <p class="px-3 pt-3 pb-1 text-[10px] font-black uppercase tracking-widest text-slate-400">Input &amp; Audit</p>
             <button onclick="openLaporanHarian()"
                 class="sidebar-btn w-full flex items-center p-4 rounded-xl transition-all bg-gradient-to-r from-[#119c9f] to-[#54b0b2] text-white hover:from-[#3ea4ac] hover:to-[#4a9fa7] shadow-md">
                 <i class="fa-solid fa-file-pen w-6"></i> <span class="ml-3 font-semibold">Input Laporan Harian</span>
                 <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs opacity-75"></i>
             </button>
-            <div class="my-2 border-t border-slate-200"></div>
             <button onclick="openIndikatorMutu()"
                 class="sidebar-btn w-full flex items-center p-4 rounded-xl transition-all bg-gradient-to-r bg-[#119c9f] text-white shadow-md">
                 <i class="fa-solid fa-chart-pie w-6"></i> <span class="ml-3 font-semibold">Input Indikator Mutu</span>
@@ -365,6 +361,12 @@
                 class="sidebar-btn w-full flex items-center p-4 rounded-xl transition-all bg-gradient-to-r from-[#119c9f] to-[#54b0b2] text-white hover:from-[#3ea4ac] hover:to-[#4a9fa7] shadow-md">
                 <i class="fa-solid fa-temperature-half w-6"></i> <span class="ml-3 font-semibold">Monitoring Suhu &amp; Kelembaban</span>
                 <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs opacity-75"></i>
+            </button>
+            <p class="px-3 pt-3 pb-1 text-[10px] font-black uppercase tracking-widest text-slate-400">Dokumen &amp; Aplikasi Terkait</p>
+            <button onclick="window.open('https://drive.google.com/drive/folders/1055i5ozzYzJA-WzF8xesyrJrCt2AB0iF?usp=sharing', '_blank')"
+                class="sidebar-btn w-full flex items-center p-4 rounded-xl transition-all bg-gradient-to-r from-[#1d4ed8] to-[#2563eb] text-white hover:from-[#1e40af] hover:to-[#1d4ed8] shadow-md">
+                <i class="fa-solid fa-file-circle-check w-6"></i> <span class="ml-3 font-semibold text-sm leading-tight">Dokumen Informed Consent / Penolakan / Persiapan</span>
+                <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs opacity-75 flex-shrink-0"></i>
             </button>
             <button onclick="window.open('https://radiologicirebon-art.github.io/Inventaris-rad/', '_blank')"
                 class="sidebar-btn w-full flex items-center p-4 rounded-xl transition-all bg-gradient-to-r from-[#f58320] to-[#d97a1a] text-white hover:from-[#d97a1a] hover:to-[#c46a10] shadow-md">
@@ -425,6 +427,7 @@
         <!-- ===== DASHBOARD ===== -->
         <section id="dashboard" class="tab-content active p-4 md:p-8">
 
+            <!-- 1. HEADER -->
             <!-- HEADER -->
             <header class="mb-5 flex flex-col md:flex-row md:justify-between md:items-center gap-3">
                 <div>
@@ -454,9 +457,30 @@
                 </div>
             </header>
 
+            <!-- 2. PERINGATAN (muncul otomatis, full width) -->
+                <div id="qcReminderBanner" class="hidden mb-4 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-[#f58320] rounded-2xl px-4 py-3 flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-[#f58320] flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-200">
+                        <i class="fa-solid fa-triangle-exclamation text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-black text-[#c4640f] text-xs uppercase tracking-wide">⚠️ QC PMI Hari Ini Belum Diisi!</p>
+                        <p id="qcReminderDetail" class="text-[10px] text-orange-700 mt-0.5">Segera lakukan pemeriksaan mutu alat.</p>
+                    </div>
+                    <button onclick="switchTab('pmi')" class="bg-[#f58320] text-white text-[10px] font-black px-3 py-2 rounded-xl hover:bg-[#d97a1a] transition flex-shrink-0">
+                        <i class="fa-solid fa-clipboard-check mr-1"></i> Isi Sekarang
+                    </button>
+                </div>
+            <div id="birthdayBanner" class="hidden mb-4 bg-gradient-to-r from-pink-50 to-purple-50 border-2 border-pink-300 rounded-2xl px-4 py-3 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-pink-400 flex items-center justify-center flex-shrink-0 shadow-lg shadow-pink-200 animate-bounce">
+                    <i class="fa-solid fa-cake-candles text-white text-sm"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-black text-pink-700 text-xs uppercase tracking-wide">🎉 Ulang Tahun Hari Ini!</p>
+                    <p id="birthdayBannerText" class="text-[10px] text-pink-600 mt-0.5"></p>
+                </div>
+            </div>
 
-
-            <!-- ====== ROW 1: STAT CARDS (6 cards) ====== -->
+            <!-- 3. RINGKASAN: 6 STAT CARD -->
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-4">
                 <!-- Suhu Ruang -->
                 <div class="bg-white rounded-2xl shadow-sm border overflow-hidden col-span-1">
@@ -542,55 +566,7 @@
                 </div>
             </div>
 
-            <!-- ====== ROW ULTAH: PENGINGAT ULANG TAHUN STAF ====== -->
-            <div id="birthdayBanner" class="hidden mb-3 bg-gradient-to-r from-pink-50 to-purple-50 border-2 border-pink-300 rounded-2xl px-4 py-3 flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-pink-400 flex items-center justify-center flex-shrink-0 shadow-lg shadow-pink-200 animate-bounce">
-                    <i class="fa-solid fa-cake-candles text-white text-sm"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="font-black text-pink-700 text-xs uppercase tracking-wide">🎉 Ulang Tahun Hari Ini!</p>
-                    <p id="birthdayBannerText" class="text-[10px] text-pink-600 mt-0.5"></p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-sm border p-4 mb-4">
-                <div class="flex items-center justify-between mb-3">
-                    <h4 class="font-black text-slate-800 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-gift text-pink-500"></i> Ulang Tahun Staf Radiologi
-                    </h4>
-                    <span id="birthdayMonthLabel" class="text-[9px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">Bulan Ini</span>
-                </div>
-                <div id="birthdayList" class="space-y-1.5"></div>
-                <p id="birthdayEmpty" class="hidden text-center text-slate-400 text-[10px] py-3">Tidak ada ulang tahun bulan ini</p>
-            </div>
-
-            <!-- ====== ROW 2: QC BANNER + CHAT LIVE ====== -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                <!-- QC REMINDER BANNER (full width when shown) -->
-                <div id="qcReminderBanner" class="hidden md:col-span-2 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-[#f58320] rounded-2xl px-4 py-3 flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-[#f58320] flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-200">
-                        <i class="fa-solid fa-triangle-exclamation text-white text-sm"></i>
-                    </div>
-                    <div class="flex-1">
-                        <p class="font-black text-[#c4640f] text-xs uppercase tracking-wide">⚠️ QC PMI Hari Ini Belum Diisi!</p>
-                        <p id="qcReminderDetail" class="text-[10px] text-orange-700 mt-0.5">Segera lakukan pemeriksaan mutu alat.</p>
-                    </div>
-                    <button onclick="switchTab('pmi')" class="bg-[#f58320] text-white text-[10px] font-black px-3 py-2 rounded-xl hover:bg-[#d97a1a] transition flex-shrink-0">
-                        <i class="fa-solid fa-clipboard-check mr-1"></i> Isi Sekarang
-                    </button>
-                </div>
-
-                <!-- LIVE CHAT MINI -->
-                <div class="md:col-span-1 bg-white rounded-2xl border shadow-sm overflow-hidden flex flex-col" style="max-height:160px">
-                    <div class="bg-[#0a0a0a] px-4 py-2 flex items-center gap-2 flex-shrink-0">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="text-white font-black text-[10px] uppercase tracking-wide">Pesan Realtime</span>
-                        <span id="chatOnlineBadge2" class="ml-auto bg-[#119c9f] text-white text-[8px] px-2 py-0.5 rounded-full font-bold">0</span>
-                    </div>
-                    <div id="chatMessagesMini" class="flex-1 overflow-y-auto p-3 space-y-1.5 bg-slate-50 text-xs"></div>
-                </div>
-            </div>
-
+            <!-- 4. STATUS KELAYAKAN ALAT -->
             <!-- ====== ROW 3: STATUS ALAT (PMI) HEATMAP ====== -->
             <div class="bg-white rounded-2xl shadow-sm border p-4 mb-4">
                 <div class="flex items-center justify-between mb-3">
@@ -608,7 +584,74 @@
                 </div>
             </div>
 
-            <!-- ====== ROW 4: GRAFIK TREN + DONUT MUTU ====== -->
+            <!-- 5. JADWAL PASIEN: HARI INI (2/5) + MENDATANG (3/5) -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-4">
+                <div class="md:col-span-2 bg-white rounded-2xl shadow-sm border p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-black text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-check text-[#119c9f]"></i> Jadwal Pasien Hari Ini
+                        </h4>
+                        <span id="dashJadwalCount" class="bg-[#119c9f] text-white text-[9px] font-black px-2 py-0.5 rounded-full">0</span>
+                    </div>
+                    <!-- Pengingat -->
+                    <div id="reminderBanner" class="hidden mb-2 bg-amber-50 border border-amber-300 rounded-xl px-3 py-2 flex items-center gap-2 text-xs text-amber-800 animate-pulse">
+                        <i class="fa-solid fa-bell text-amber-500 flex-shrink-0"></i>
+                        <span id="reminderText" class="font-bold text-[10px]"></span>
+                    </div>
+                    <!-- H-15 menit banner -->
+                    <div id="notifJadwalBanner" class="hidden mb-2 bg-[#eef7f8] border-2 border-[#119c9f] rounded-xl px-3 py-2">
+                        <div class="flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-clock-rotate-left text-[#119c9f] text-xs"></i>
+                            <span class="text-[9px] font-black text-[#119c9f] uppercase tracking-widest">Jadwal Segera</span>
+                        </div>
+                        <div id="notifJadwalList" class="space-y-1"></div>
+                    </div>
+                    <!-- Tabel jadwal -->
+                    <div class="overflow-x-auto rounded-xl border">
+                        <table class="w-full text-left text-[9px]">
+                            <thead class="bg-slate-50 border-b">
+                                <tr>
+                                    <th class="px-2 py-2 font-black text-slate-500 uppercase">Jam</th>
+                                    <th class="px-2 py-2 font-black text-slate-500 uppercase">Pemeriksaan</th>
+                                    <th class="px-2 py-2 font-black text-slate-500 uppercase">Pasien</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashJadwalList" class="divide-y"></tbody>
+                        </table>
+                    </div>
+                    <p id="dashJadwalEmpty" class="text-center text-slate-400 text-[10px] py-3 hidden">Belum ada jadwal hari ini</p>
+                    <button onclick="switchTab('jadwal')" class="w-full mt-2 py-1.5 bg-slate-50 hover:bg-[#eef7f8] rounded-xl text-[9px] font-black text-[#119c9f] border transition">
+                        <i class="fa-solid fa-plus mr-1"></i> Tambah Jadwal
+                    </button>
+                </div>
+
+                <div class="md:col-span-3 bg-white rounded-2xl shadow-sm border p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-black text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-days" style="color:#7fb9c0"></i> Jadwal Mendatang
+                            <span class="text-[8px] font-semibold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">7 hari ke depan</span>
+                        </h4>
+                        <span id="dashJadwalMendatangCount" class="text-white text-[9px] font-black px-2 py-0.5 rounded-full" style="background:#f5a45a">0</span>
+                    </div>
+                    <div class="overflow-x-auto rounded-xl border">
+                        <table class="w-full text-left text-[9px]">
+                            <thead class="border-b" style="background:#eef7f8">
+                                <tr>
+                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Tanggal</th>
+                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Jam</th>
+                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Pemeriksaan</th>
+                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Pasien</th>
+                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Sisa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashJadwalMendatangList" class="divide-y"></tbody>
+                        </table>
+                    </div>
+                    <p id="dashJadwalMendatangEmpty" class="text-center text-slate-400 text-[10px] py-3 hidden">Tidak ada jadwal dalam 7 hari ke depan</p>
+                </div>
+            </div>
+
+            <!-- 6. GRAFIK MUTU ALAT: TREN (2/3) + DONUT (1/3) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                 <!-- TREND CHART (2/3 width) -->
                 <div class="md:col-span-2 bg-white p-4 rounded-2xl shadow-sm border">
@@ -657,10 +700,9 @@
                 </div>
             </div>
 
-            <!-- ====== ROW 5: OPERAN SUMMARY + JADWAL LIVE ====== -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                <!-- OPERAN DINAS TERBARU -->
-                <div class="bg-white rounded-2xl shadow-sm border p-4">
+            <!-- 7. INFO TIM: OPERAN | PETUGAS ONLINE + PANGGILAN | ULANG TAHUN -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                <div class="bg-white rounded-2xl shadow-sm border p-4 h-full">
                     <div class="flex items-center justify-between mb-3">
                         <h4 class="font-black text-slate-800 text-sm flex items-center gap-2">
                             <i class="fa-solid fa-file-signature text-[#119c9f]"></i> Operan Dinas Terbaru
@@ -672,76 +714,6 @@
                     </div>
                 </div>
 
-                <!-- JADWAL PASIEN HARI INI -->
-                <div class="bg-white rounded-2xl shadow-sm border p-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <h4 class="font-black text-slate-800 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-calendar-check text-[#119c9f]"></i> Jadwal Pasien Hari Ini
-                        </h4>
-                        <span id="dashJadwalCount" class="bg-[#119c9f] text-white text-[9px] font-black px-2 py-0.5 rounded-full">0</span>
-                    </div>
-                    <!-- Pengingat -->
-                    <div id="reminderBanner" class="hidden mb-2 bg-amber-50 border border-amber-300 rounded-xl px-3 py-2 flex items-center gap-2 text-xs text-amber-800 animate-pulse">
-                        <i class="fa-solid fa-bell text-amber-500 flex-shrink-0"></i>
-                        <span id="reminderText" class="font-bold text-[10px]"></span>
-                    </div>
-                    <!-- H-15 menit banner -->
-                    <div id="notifJadwalBanner" class="hidden mb-2 bg-[#eef7f8] border-2 border-[#119c9f] rounded-xl px-3 py-2">
-                        <div class="flex items-center gap-1 mb-1">
-                            <i class="fa-solid fa-clock-rotate-left text-[#119c9f] text-xs"></i>
-                            <span class="text-[9px] font-black text-[#119c9f] uppercase tracking-widest">Jadwal Segera</span>
-                        </div>
-                        <div id="notifJadwalList" class="space-y-1"></div>
-                    </div>
-                    <!-- Tabel jadwal -->
-                    <div class="overflow-x-auto rounded-xl border">
-                        <table class="w-full text-left text-[9px]">
-                            <thead class="bg-slate-50 border-b">
-                                <tr>
-                                    <th class="px-2 py-2 font-black text-slate-500 uppercase">Jam</th>
-                                    <th class="px-2 py-2 font-black text-slate-500 uppercase">Pemeriksaan</th>
-                                    <th class="px-2 py-2 font-black text-slate-500 uppercase">Pasien</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dashJadwalList" class="divide-y"></tbody>
-                        </table>
-                    </div>
-                    <p id="dashJadwalEmpty" class="text-center text-slate-400 text-[10px] py-3 hidden">Belum ada jadwal hari ini</p>
-                    <button onclick="switchTab('jadwal')" class="w-full mt-2 py-1.5 bg-slate-50 hover:bg-[#eef7f8] rounded-xl text-[9px] font-black text-[#119c9f] border transition">
-                        <i class="fa-solid fa-plus mr-1"></i> Tambah Jadwal
-                    </button>
-                </div>
-            </div>
-
-            <!-- ====== ROW 6: JADWAL MENDATANG + CHAT ONLINE USERS ====== -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                <!-- Jadwal Mendatang (2/3) -->
-                <div class="md:col-span-2 bg-white rounded-2xl shadow-sm border p-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <h4 class="font-black text-slate-800 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-calendar-days" style="color:#7fb9c0"></i> Jadwal Mendatang
-                            <span class="text-[8px] font-semibold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">7 hari ke depan</span>
-                        </h4>
-                        <span id="dashJadwalMendatangCount" class="text-white text-[9px] font-black px-2 py-0.5 rounded-full" style="background:#f5a45a">0</span>
-                    </div>
-                    <div class="overflow-x-auto rounded-xl border">
-                        <table class="w-full text-left text-[9px]">
-                            <thead class="border-b" style="background:#eef7f8">
-                                <tr>
-                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Tanggal</th>
-                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Jam</th>
-                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Pemeriksaan</th>
-                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Pasien</th>
-                                    <th class="px-2 py-2 font-black uppercase" style="color:#119c9f">Sisa</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dashJadwalMendatangList" class="divide-y"></tbody>
-                        </table>
-                    </div>
-                    <p id="dashJadwalMendatangEmpty" class="text-center text-slate-400 text-[10px] py-3 hidden">Tidak ada jadwal dalam 7 hari ke depan</p>
-                </div>
-
-                <!-- Online Users + Panggilan Darurat -->
                 <div class="md:col-span-1 flex flex-col gap-3">
                     <!-- Petugas Online -->
                     <div class="bg-white rounded-2xl shadow-sm border p-4 flex-1">
@@ -762,9 +734,20 @@
                         <div id="daruratContent" class="text-[10px] text-slate-400">Memuat...</div>
                     </div>
                 </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border p-4 h-full">
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="font-black text-slate-800 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-gift text-pink-500"></i> Ulang Tahun Staf Radiologi
+                    </h4>
+                    <span id="birthdayMonthLabel" class="text-[9px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">Bulan Ini</span>
+                </div>
+                <div id="birthdayList" class="space-y-1.5"></div>
+                <p id="birthdayEmpty" class="hidden text-center text-slate-400 text-[10px] py-3">Tidak ada ulang tahun bulan ini</p>
+            </div>
             </div>
 
-            <!-- ====== ROW 7: REALTIME CHAT (Full) ====== -->
+            <!-- 8. PESAN REALTIME SHIFT -->
             <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
                 <div class="bg-[#0a0a0a] px-5 py-3 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -2435,6 +2418,7 @@
         // PENGINGAT ULANG TAHUN STAF RADIOLOGI
         // =============================================
         const daftarUlangTahunStaff = [
+            { nama: "Lalan Permana Herlambang, A.Md.Rad", tgl: "1980-01-03" },
             { nama: "Salsa Dea Charira, A.Md.Kes.Rad", tgl: "2003-01-05" },
             { nama: "Rita Riana, A.Md.Rad", tgl: "1994-01-13" },
             { nama: "Zhafira Nur Hasanah, A.Md.Rad", tgl: "2000-02-20" },
